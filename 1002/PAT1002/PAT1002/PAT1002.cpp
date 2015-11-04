@@ -6,7 +6,14 @@
 using namespace std;
 int main()
 {
-
-    return 0;
+	char num[101] = { 0 };
+	cin >> num;
+	int total = 0;
+	char *temp = num;
+	while (*temp!='\0')
+	{
+		total += (*temp - '0');
+		temp++;
+	}
 }
 
