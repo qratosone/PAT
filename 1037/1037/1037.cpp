@@ -3,25 +3,41 @@
 
 #include "stdafx.h"
 #include   <iostream>   
-#include   <cstdlib>   
+
 //是赋值以逗号为分隔符  
 using   namespace   std;
-
+int Knut(int g, int s, int k) {
+	int total;
+	total = k + s * 29 + g * 17 * 29;
+	return total;
+}
+void output(int total) {
+	
+	int k = total % 29;
+	int s = (total / 29) % 17;
+	int g = total / (17 * 29);
+	if (s<0)
+	{
+		s = -s;
+	}
+	if (k<0)
+	{
+		k = -k;
+	}
+	cout << g << "." << s << "." << k << endl;
+}
 int   main()
 {
-	int   a, b, c,d,e,f;
-	cin >> a; cin.ignore(1, ', ');
-	cin >> b; cin.ignore(1, ', ');
-	cin >> c; cin.ignore(1, ', ');
-	cin >> d; cin.ignore(1, ', ');
-	cin >> e; cin.ignore(1, ', ');
-	cin >> f; cin.ignore(1, ', ');
-	cout << a << endl;
-	cout << b << endl;
-	cout << c << endl;
-	cout << d << endl;
-	cout << e << endl;
-	cout << f << endl;
-	system("pause ");
+	int   a1, a2, a3,b1,b2,b3;
+	cin >> a1; cin.ignore(1, ', ');
+	cin >> a2; cin.ignore(1, ', ');
+	cin >> a3; cin.ignore(1, ', ');
+	cin >> b1; cin.ignore(1, ', ');
+	cin >> b2; cin.ignore(1, ', ');
+	cin >> b3; cin.ignore(1, ', ');
+	int totalP = Knut(a1, a2, a3);
+	int totalA = Knut(b1, b2, b3);
+	int delta = totalA - totalP;
+	output(delta);
 	return   0;
 }
