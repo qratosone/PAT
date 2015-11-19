@@ -3,28 +3,21 @@
 
 #include "stdafx.h"
 #include <iostream>
-#include <algorithm>
 #include <vector>
 using namespace std;
-int countNum(vector<int> v, int s) {
-	vector<int>::iterator iter=find(v.begin(), v.end(), s);
-	int count = 0;
-	while ((*iter) == s) {
-		count++;
-		iter++;
-	}
-	return count;
-}
+
 int main()
 {
+	int arr[150] = { 0 };
 	int n;
 	cin >> n;
 	vector<int>a(n);
 	for (int i = 0; i < n; i++)
 	{
 		cin >> a[i];
+		arr[a[i]]++;
 	}
-	sort(a.begin(),a.end());
+	
 	int m;
 	cin >> m;
 	vector<int>b(m);
@@ -32,10 +25,16 @@ int main()
 		cin >> b[i];
 	}
 	for (int i = 0; i < m; i++) {
-		int num = countNum(a,b[i]);
-		cout << num << " ";
+		int num = arr[b[i]];
+		if (i==m-1)
+		{
+			cout << num;
+		}
+		else {
+			cout << num << " ";
+		}
 	}
-	cout << endl;
+
     return 0;
 }
 
