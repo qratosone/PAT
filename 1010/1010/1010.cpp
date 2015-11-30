@@ -3,22 +3,17 @@
 
 #include "stdafx.h"
 #include <iostream>
-
 using namespace std;
 
 
 int main()
 {
-	int num1,num2;
+	int a, n;
 	bool flag = false;
-	while(true)
+	while (cin>>a>>n)
 	{
-		cin >> num1>>num2;
 		
-		int a, n;
-		a = num1;
-		n = num2;
-		if (n!=0)
+		if (n != 0)
 		{
 			a = a*n;
 			n--;
@@ -28,8 +23,8 @@ int main()
 			a = 0;
 			n = 0;
 		}
-		
-		if (a!=0||n!=0)
+
+		if (a != 0 || n != 0)
 		{
 			if (!flag)
 			{
@@ -41,13 +36,13 @@ int main()
 				cout << " " << a << " " << n;
 			}
 		}
-		if (!flag)
-		{
-			cout << "0 0";
-		}
-		if (num1*num2 == 0)break;
+		
+		
 	}
-
-    return 0;
+	if (!flag)
+	{
+		cout << "0 0";
+	}
+	return 0;
 }
 
