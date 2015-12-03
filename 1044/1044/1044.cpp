@@ -5,83 +5,115 @@
 #include <iostream>
 #include <stdio.h>
 #include <string>
-#include <vector>
+#include <fstream>
 using namespace std;
 string arr1[13] = { "tret","jan","feb","mar","apr","may","jun","jly","aug","sep","oct","nov","dec" };
 string arr2[12] = { "tam","hel","maa","huh","tou","kes","hei","elo","syy","lok","mer","jou" };
+bool stringEqual(string a, string b) {
+	if (a.length()!=b.length())
+	{
+		return false;
+	}
+	else
+	{
+		for (int i = 0; i < a.length(); i++)
+		{
+			if (a[i] != b[i])return false;
+		}
+	}
+	return true;
+}
 int main()
 {
-	int n;
-	scanf_s("%d", &n);
+	int n=98;
+	//scanf_s("%d", &n);
 	
 	string mars;
-	string input;
-	vector<int> result(n); //1=int,0=string
-	vector<int> earthNum;
-	vector<string>marsNum;
-	
+	string input[100] = { "" };
+	/*ifstream in;
+	in.open("test.txt");*/
+
+	bool flag = false;
 	for (int i = 0; i <n+1 ; i++)
 	{
-		getline(cin, input);
 		
-		if (input[0]>='0'&&input[0]<='9')
-		{
-			int earth = 0;
-			int count = 0;
-			do
+		//getline(in,input[i]);
+		getline(cin, input[i], '\n');
+		if (i == 0) { continue; }
+		if (input[i][0] >= '0'&&input[i][0] <= '9') {
+			int num = 0;
+			for (int j = 0; j < input[i].length(); j++)
 			{
-				earth = earth * 10 + (input[count]-'0');
-				count++;
-			} while (count<input.size());
-			if (earth<13)
+				num = num * 10 + input[i][j] - '0';
+			}
+			int a = 0, b = 0;
+			a = num / 13;
+			b = num % 13;
+			if (a>0)
 			{
-				cout << arr1[earth] << endl;
+				if (b!=0)
+				{
+					printf("%s %s\n", arr2[a - 1].c_str(), arr1[b].c_str());
+				}
+				else
+				{
+					printf("%s\n", arr2[a - 1].c_str());
+				}
 			}
 			else
 			{
-				cout << arr2[earth / 13-1] << " "<<arr1[earth % 13]<<endl;
+				printf("%s\n", arr1[b].c_str());
 			}
 		}
 		else
 		{
-			string temp;
-			
-			for (int i = 0; i < input.length(); i++)
+			if (input[i].length()<=4)
 			{
-				if (input[i]!=' ')
+				int num = 0;
+				bool flag = false;
+				for (int j = 0; j < 13; j++)
 				{
-                      temp.push_back(input[i]);
+					if (stringEqual(input[i], arr1[j])) { num = j; flag = true; break; }
 				}
-				else
+				while (!flag)
 				{
-					marsNum.push_back(temp);
-					temp.clear();
-					
+					for (int j = 0; j < 12; j++) {
+						if (stringEqual(input[i],arr2[j]))
+						{
+							num = 13 * (j + 1);
+							flag = true;
+							break;
+						}
+					}
+					break;
 				}
-				
-			};
-			marsNum.push_back(temp);
-			
-			bool flag = false;
-			for (int j=0; j<marsNum.size(); j++)
-			{
-
-			
-				int number=0;
-				for (int i = 0; i < 12; i++)
-				{
-					if (arr2[i] == marsNum[0])number = number + i * 13;
-				}
-				for (int i = 0; i < 13; i++)
-				{
-					if (arr1[i] == marsNum[1])number = number + i;
-				}
-				cout << number << endl;
+				printf("%d\n", num);
 			}
-			
+			else
+			{
+				int spacePos = input[i].find(' ');
+				string str1 = input[i].substr(0, spacePos);
+				string str2 = input[i].substr(spacePos + 1, input[i].size());
+				int num = 0;
+				for (int j = 0; j < 12; j++)
+				{
+					if (stringEqual(str1,arr2[j]))
+					{
+						num += 13 * (j + 1);
+					}
+				}
+				for (int j = 0; j < 13; j++)
+				{
+					if (stringEqual(str2,arr1[j]))
+					{
+						num += j;
+					}
+				}
+				printf("%d\n", num);
+			}
 		}
-		if (i == 0)marsNum.clear();
 	}
+	
     return 0;
 }
 
