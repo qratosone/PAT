@@ -3,6 +3,7 @@
 
 #include "stdafx.h"
 #include <iostream>
+#include <cstdio>
 using namespace std;
 
 int main()
@@ -15,9 +16,11 @@ int main()
 		deltaSecond++;
 	}
 	int hour = deltaSecond / 3600;
-	int min = (deltaSecond % 3600) / 60;
-	int sec = deltaSecond -hour*3600-min*60;
-	cout << hour << ":" << min << ":" << sec << endl;
+	deltaSecond -= (hour * 3600);
+	int min = deltaSecond / 60;
+	deltaSecond -= min * 60;
+	int sec = deltaSecond ;
+	printf("%02d:%02d:%02d", hour, min, sec);
     return 0;
 }
 
